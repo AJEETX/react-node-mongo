@@ -1,39 +1,68 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { userService } from '../_services';
+import { userActions } from '../_actions';
 
 class AdminPage extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            users: null
-        };
+    handleDeleteUser(id) {
+        return (e) => this.props.deleteUser(id);
     }
-
     componentDidMount() {
-        userService.getAll().then(users => this.setState({ users }));
+        this.props.getUsers();
     }
 
     render() {
-        const { users } = this.state;
+        const { user, users } = this.props;
+
         return (
-            <div>
-                <h1>Admin</h1>
-                <p>This page can only be accessed by administrators.</p>
+            <div className="home-page-height">
+            <h2>Hi {user.firstName}!</h2>
                 <div>
-                    All users from secure (admin only) api end point:
-                    {users &&
-                        <ul>
-                            {users.map(user =>
-                                <li key={user.id}>{user.firstName} {user.lastName}</li>
-                            )}
-                        </ul>
-                    }
+                {users.loading && <em>Loading users...</em>}
+                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
+                {users.items &&
+                <table>
+                    <thead>
+                        <tr>
+                        <th> First Name</th>
+                        <th> Last Name</th>
+                        <th> Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.items.map((user, index) =>
+                            <tr key={user.id}>
+                                <td>
+                                {user.firstName }</td>
+                                <td>
+                                { user.lastName}</td>
+                                <td>
+                                {
+                                    user.deleting ? <em> - Deleting...</em>
+                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
+                                    : <a className="btn btn-primary" onClick={this.handleDeleteUser(user.id)}>Delete</a>
+                                }
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+                }
                 </div>
             </div>
         );
     }
 }
+function mapState(state) {
+    const { users, authentication } = state;
+    const { user } = authentication;
+    return { user, users };
+}
 
-export { AdminPage };
+const actionCreators = {
+    getUsers: userActions.getAll,
+    deleteUser: userActions.delete
+}
+const connectedAdminPage = connect(mapState, actionCreators)(AdminPage)
+export { connectedAdminPage as AdminPage };
