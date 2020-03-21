@@ -13,7 +13,8 @@ class AdminPage extends React.Component {
         return (e) => this.props.dispatch(candidateActions.delete(id));
     }
     handleEditProduct(id) {
-        this.props.dispatch(candidateActions.getById(id)); 
+        console.log(id)
+        //this.props.dispatch(candidateActions.getById(id)); 
     }
     componentDidMount() {
        this.props.dispatch(candidateActions.getAll());
@@ -25,7 +26,6 @@ class AdminPage extends React.Component {
         return (
             <div className="home-page-height">
             <h2>Hi {user.firstName}!</h2>
-            {/* <Link to="/candidate" className="btn btn-link">Add candidate</Link> */}
                 <div>
                 {candidates.loading && <em>Loading candidates...</em>}
                 {candidates.error && <span className="text-danger">ERROR: {candidates.error}</span>}
@@ -47,15 +47,17 @@ class AdminPage extends React.Component {
                                 { candidate.LastName}</td>
                                 <td className="action">
                                 {
-                                    candidate.deleting ? <em> - Deleting...</em>
-                                    : candidate.deleteError ? <span className="text-danger"> - ERROR: {candidate.deleteError}</span>
-                                    : <a className="btn btn-primary" onClick={this.handleDeletecandidate(candidate.id)}>Edit</a>
+                                    candidate.editing ? <em> - Editing...</em>
+                                    : candidate.editError ? <span className="text-danger"> - ERROR: {candidate.editError}</span>
+                                    : <a className="btn btn-primary" onClick={this.handleEditProduct(candidate.id)}> 
+                                    <i className="fa fa-edit"></i></a>
                                 }
                                 &nbsp;&nbsp;&nbsp;
                                 {
                                     candidate.deleting ? <em> - Deleting...</em>
                                     : candidate.deleteError ? <span className="text-danger"> - ERROR: {candidate.deleteError}</span>
-                                    : <a className="btn btn-primary" onClick={this.handleDeletecandidate(candidate.id)}>Delete</a>
+                                    : <a className="btn btn-primary" onClick={this.handleDeletecandidate(candidate.id)}>
+                                        <i className="fa fa-trash-o"></i></a>
                                 }
                                 </td>
                             </tr>

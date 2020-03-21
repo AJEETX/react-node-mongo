@@ -10,6 +10,7 @@ import { AdminPage } from '../AdminPage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import {CandidatePage} from '../CandidatePage'
+import {UpdateCandidatePage} from '../UpdateCandidatePage'
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -53,11 +54,12 @@ class App extends React.Component {
                         <div className="row">
                                 <div className="col-md-12 offset-md-0">
                                 {alert.message &&
-                                    <span className={`alert ${alert.type}`}><i class="fa fa-warning"></i>{alert.message}</span>
+                                    <span className={`alert ${alert.type}`}>{alert.message}</span>
                                 }
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
                                     <PrivateRoute path="/candidate" roles={[Role.Admin]} component={CandidatePage} />
+                                    <PrivateRoute path="/update"  component={UpdateCandidatePage} />
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/register" component={RegisterPage} />
                                 </div>

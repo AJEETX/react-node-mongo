@@ -19,7 +19,7 @@ function register(candidate) {
             .then(
                 candidate => { 
                     dispatch(success());
-                    history.push('/');
+                    history.push('/admin');
                     dispatch(alertActions.success('Candidate added successfully'));
                 },
                 error => {
