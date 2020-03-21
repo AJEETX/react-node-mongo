@@ -50,10 +50,10 @@ class App extends React.Component {
                 <div className="jumbotron">
                     <div className="container">
                         <div className="row">
-                            {alert.message &&
-                                <div className={`alert ${alert.type}`}>{alert.message}</div>
-                            }
                                 <div className="col-md-12 offset-md-0">
+                                {alert.message &&
+                                    <span className={`alert ${alert.type}`}><i class="fa fa-warning"></i>{alert.message}</span>
+                                }
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
                                     <Route path="/login" component={LoginPage} />
