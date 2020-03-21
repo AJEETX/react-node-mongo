@@ -37,7 +37,7 @@ class App extends React.Component {
         const {currentUser, isAdmin}=this.state
         return (
             <Router history={history}>
-            <div>
+            <div className="center-top">
                 {currentUser &&
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
                         <div className="navbar-nav">
@@ -53,7 +53,7 @@ class App extends React.Component {
                             {alert.message &&
                                 <div className={`alert ${alert.type}`}>{alert.message}</div>
                             }
-                                <div className="col-md-6 offset-md-3">
+                                <div className="col-md-12 offset-md-0">
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
                                     <Route path="/login" component={LoginPage} />
