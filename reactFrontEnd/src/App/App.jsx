@@ -9,7 +9,7 @@ import { HomePage } from '../HomePage';
 import { AdminPage } from '../AdminPage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-
+import {CandidatePage} from '../CandidatePage'
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +43,7 @@ class App extends React.Component {
                         <div className="navbar-nav">
                             <Link to="/" className="nav-item nav-link">Home</Link>
                             {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
+                            {isAdmin && <Link to="/candidate" className="nav-item nav-link">Add Candidate</Link>}
                             <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                         </div>
                     </nav>
@@ -56,6 +57,7 @@ class App extends React.Component {
                                 }
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
+                                    <PrivateRoute path="/candidate" roles={[Role.Admin]} component={CandidatePage} />
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/register" component={RegisterPage} />
                                 </div>

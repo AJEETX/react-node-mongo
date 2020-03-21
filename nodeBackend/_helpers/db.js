@@ -26,5 +26,6 @@ const connectWithRetry = () => {
 connectWithRetry();
 
 module.exports = {
-    User: require('../users/user.model')
+    User: require('../users/user.model'),
+    Candidate:require('../candidates/candidate.model')
 };

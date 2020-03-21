@@ -23,9 +23,9 @@ async function getById(id) {
 async function create(candidateParam) {
     // validate
     console.log(candidateParam)
-    if (await Candidate.findOne({ username: candidateParam.username })) {
-        throw 'Username "' + candidateParam.username + '" is already taken';
-    }
+    // if (await Candidate.findOne({ Email: candidateParam.Email })) {
+    //     throw 'Email "' + candidateParam.Email + '" is already taken';
+    // }
 
     const candidate = new Candidate(candidateParam);
     // save candidate

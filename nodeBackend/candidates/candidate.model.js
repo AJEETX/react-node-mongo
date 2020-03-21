@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    email: { type: String, unique: true, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    Email: { type: String, unique: true, required: true },
+    FirstName: { type: String, required: true },
+    LastName: { type: String, required: true },
     Description: { type: String},
-    contactNumber: { type: Number, required: true },
-    dateOfBirth: { type: Date, default: Date.now },
+    ContactNumber: { type: Number, required: true },
+    DateOfBirth: { type: Date, default: Date.now },
     modifiedDate: { type: Date, default: Date.now },
     createdDate: { type: Date, default: Date.now }
 });
