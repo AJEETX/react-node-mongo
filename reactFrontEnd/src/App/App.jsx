@@ -49,11 +49,11 @@ class App extends React.Component {
                 }                
                 <div className="jumbotron">
                     <div className="container">
-                        <div className="">
+                        <div className="row">
                             {alert.message &&
                                 <div className={`alert ${alert.type}`}>{alert.message}</div>
                             }
-                                <div className="col-md-8 offset-md-4">
+                                <div className="col-md-6 offset-md-3">
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
                                     <Route path="/login" component={LoginPage} />
