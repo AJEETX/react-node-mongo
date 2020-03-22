@@ -27,6 +27,7 @@ class UpdateCandidatePage extends React.Component {
                 LastName:this.refs.LastName.value,
                 Email:this.refs.Email.value,
                 Description:this.refs.Description.value,
+                DateOfBirth:this.refs.DateOfBirth.value,
                 ContactNumber:this.refs.ContactNumber.value
         }
         if ( candidate.FirstName && candidate.LastName && candidate.Email  && candidate.Description && candidate.ContactNumber) {
@@ -36,7 +37,7 @@ class UpdateCandidatePage extends React.Component {
 
     render() {
         const { candidate } = this.props;
-        const {FirstName,LastName,Email,Description,ContactNumber,submitted}=this.state
+        const {FirstName,LastName,Email,Description,ContactNumber,DateOfBirth,submitted}=this.state
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h4>Update candidate</h4>
@@ -79,6 +80,14 @@ class UpdateCandidatePage extends React.Component {
                         onChange={(value) => this.onChange(value)} ref="ContactNumber"  />
                         { submitted &&!ContactNumber &&
                             <div className="help-block">ContactNumber is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !DateOfBirth ? ' has-error' : '')}>
+                        <label htmlFor="DateOfBirth">DateOfBirth</label>
+                        <input type="text" className="form-control" placeholder="ddMMyyyy" name="DateOfBirth" value={DateOfBirth} defaultValue={candidate.DateOfBirth} 
+                        onChange={(value) => this.onChange(value)} ref="DateOfBirth"  />
+                        { submitted &&!DateOfBirth &&
+                            <div className="help-block">DateOfBirth is required</div>
                         }
                     </div>
                     <div className="form-group">

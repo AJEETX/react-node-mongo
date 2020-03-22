@@ -24,6 +24,7 @@ class AdminPage extends React.Component {
 
         return (
             <div className="home-page-height">
+            <div> <Link to="/candidate" className="add-candidate-link-button" ><button type="button" className="btn btn-primary">Add Candidate</button></Link></div>
             <h4>Hi {user.firstName}!</h4>
                 <div>
                 {candidates.loading && <em>Loading candidates...</em>}
