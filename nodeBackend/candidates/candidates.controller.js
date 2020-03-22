@@ -38,6 +38,8 @@ function getById(req, res, next) {
 }
 
 function update(req, res, next) {
+    console.log('update in progress ... '+req.params.id)
+    console.log('update in progress ... '+req.params.body)
     candidateService.update(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));

@@ -13,7 +13,6 @@ class AdminPage extends React.Component {
         return (e) => this.props.dispatch(candidateActions.delete(id));
     }
     handleEditProduct(id) {
-        console.log(id)
         this.props.dispatch(candidateActions.getById(id)); 
     }
     componentDidMount() {

@@ -67,7 +67,7 @@ function getById(id) {
     };
 
     function request(id) { return { type: candidateConstants.GET_REQUEST, id } }
-    function success(product) { return { type: candidateConstants.GET_SUCCESS, product } }
+    function success(candidate) { return { type: candidateConstants.GET_SUCCESS, candidate } }
     function failure(id, error) { return { type: candidateConstants.GET_FAILURE, id, error } }
 }
 function update(candidate){

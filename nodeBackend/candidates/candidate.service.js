@@ -34,11 +34,11 @@ async function create(candidateParam) {
 
 async function update(id, candidateParam) {
     const candidate = await Candidate.findById(id);
-
+    console.log('update in service '+ candidate)
     // validate
     if (!candidate) throw 'User not found';
-    if (candidate.username !== candidateParam.username && await Candidate.findOne({ username: candidateParam.username })) {
-        throw 'Username "' + candidateParam.username + '" is already taken';
+    if (candidate.Email !== candidateParam.Email && await Candidate.findOne({ Email: candidateParam.Email })) {
+        throw 'Username "' + candidateParam.Email + '" is already taken';
     }
 
     // copy candidateParam properties to user
