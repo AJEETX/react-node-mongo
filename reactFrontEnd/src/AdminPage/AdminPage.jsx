@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { userService } from '../_services';
 import { userActions } from '../_actions';
 import { candidateActions } from '../_actions';
-
+import {dateFormat} from 'dateformat'
 class AdminPage extends React.Component {
     constructor(props){
         super(props)
@@ -35,6 +35,9 @@ class AdminPage extends React.Component {
                         <tr>
                         <th> First Name</th>
                         <th> Last Name</th>
+                        <th> Email</th>
+                        <th> Contact Number</th>
+                        <th> Date of Birth</th>
                         <th> Action</th>
                         </tr>
                     </thead>
@@ -45,6 +48,12 @@ class AdminPage extends React.Component {
                                 {candidate.FirstName }</td>
                                 <td>
                                 { candidate.LastName}</td>
+                                <td>
+                                { candidate.Email}</td>  
+                                <td>
+                                { candidate.ContactNumber}</td>  
+                                <td>
+                                {  new Date(candidate.DateOfBirth).toDateString()}</td>                                                                                                
                                 <td className="action">
                                 {
                                     candidate.editing ? <em> - Editing...</em>

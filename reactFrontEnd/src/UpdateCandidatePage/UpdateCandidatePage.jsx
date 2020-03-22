@@ -44,7 +44,7 @@ class UpdateCandidatePage extends React.Component {
                 <form name="form" onSubmit={this.handleSubmit.bind(this)}>
                     <div className={'form-group' + ( submitted && !FirstName ? ' has-error' : '')}>
                         <label htmlFor="FirstName">FirstName</label>
-                        <input type="text" className="form-control" name="FirstName" value={FirstName} defaultValue={candidate.FirstName} 
+                        <input type="text" className="form-control" name="FirstName" defaultValue={candidate.FirstName} 
                         onChange={(value) => this.onChange(value)} ref="FirstName" />
                         {submitted && !FirstName &&
                             <div className="help-block">FirstName is required</div>
@@ -52,7 +52,7 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className={'form-group' + (submitted && !LastName ? ' has-error' : '')}>
                         <label htmlFor="LastName">LastName</label>
-                        <input type="text" className="form-control" name="LastName" value={LastName} defaultValue={candidate.LastName} 
+                        <input type="text" className="form-control" name="LastName" defaultValue={candidate.LastName} 
                         onChange={(value) => this.onChange(value)} ref="LastName" />
                         { submitted && !LastName &&
                             <div className="help-block">LastName is required</div>
@@ -60,7 +60,7 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className={'form-group' + (submitted && !Email ? ' has-error' : '')}>
                         <label htmlFor="Email">Email</label>
-                        <input type="text" className="form-control" name="Email" value={Email} defaultValue={candidate.Email} 
+                        <input type="text" className="form-control" name="Email" defaultValue={candidate.Email} 
                         onChange={(value) => this.onChange(value)} ref="Email"  />
                         { submitted &&!Email &&
                             <div className="help-block">Email is required</div>
@@ -76,7 +76,7 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className={'form-group' + (submitted && !ContactNumber ? ' has-error' : '')}>
                         <label htmlFor="ContactNumber">ContactNumber</label>
-                        <input type="number" className="form-control" name="ContactNumber" value={ContactNumber} defaultValue={candidate.ContactNumber} 
+                        <input type="number" className="form-control" name="ContactNumber" defaultValue={candidate.ContactNumber} 
                         onChange={(value) => this.onChange(value)} ref="ContactNumber"  />
                         { submitted &&!ContactNumber &&
                             <div className="help-block">ContactNumber is required</div>
@@ -84,7 +84,8 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className={'form-group' + (submitted && !DateOfBirth ? ' has-error' : '')}>
                         <label htmlFor="DateOfBirth">DateOfBirth</label>
-                        <input type="text" className="form-control" placeholder="ddMMyyyy" name="DateOfBirth" value={DateOfBirth} defaultValue={candidate.DateOfBirth} 
+                        <input type="date" className="form-control" placeholder="ddMMyyyy" name="DateOfBirth" 
+                        defaultValue={new Date(candidate.DateOfBirth).toDateString()} 
                         onChange={(value) => this.onChange(value)} ref="DateOfBirth"  />
                         { submitted &&!DateOfBirth &&
                             <div className="help-block">DateOfBirth is required</div>
@@ -92,7 +93,7 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Update candidate</button>
-                        <Link to="/" className="btn btn-link">Cancel</Link>
+                        <Link to="/admin" className="btn btn-link">Cancel</Link>
                     </div>
                 </form>
 

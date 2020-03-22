@@ -92,7 +92,7 @@ class CandidatePage extends React.Component{
                     </div>                    
                     <div className="form-group">
                         <button className="btn btn-primary">Add candidate</button> &nbsp;
-                        <Link to="/" className="btn-link">Cancel</Link>
+                        <Link to="/admin" className="btn-link">Cancel</Link>
                     </div>
                 </form>
 

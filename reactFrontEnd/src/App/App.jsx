@@ -44,7 +44,7 @@ class App extends React.Component {
                         <div className="navbar-nav">
                             <Link to="/" className="nav-item nav-link">Home</Link>
                             {isAdmin && <Link to="/admin" className="nav-item nav-link">Candidates</Link>}
-                            {isAdmin && <Link to="/candidate" className="nav-item nav-link">Add Candidate</Link>}
+                            {/* {isAdmin && <Link to="/candidate" className="nav-item nav-link">Add Candidate</Link>} */}
                             <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                         </div>
                     </nav>
