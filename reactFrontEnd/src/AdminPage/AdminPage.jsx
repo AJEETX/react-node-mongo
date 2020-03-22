@@ -14,7 +14,7 @@ class AdminPage extends React.Component {
     }
     handleEditProduct(id) {
         console.log(id)
-        //this.props.dispatch(candidateActions.getById(id)); 
+        this.props.dispatch(candidateActions.getById(id)); 
     }
     componentDidMount() {
        this.props.dispatch(candidateActions.getAll());
@@ -25,7 +25,7 @@ class AdminPage extends React.Component {
 
         return (
             <div className="home-page-height">
-            <h2>Hi {user.firstName}!</h2>
+            <h4>Hi {user.firstName}!</h4>
                 <div>
                 {candidates.loading && <em>Loading candidates...</em>}
                 {candidates.error && <span className="text-danger">ERROR: {candidates.error}</span>}
@@ -49,14 +49,14 @@ class AdminPage extends React.Component {
                                 {
                                     candidate.editing ? <em> - Editing...</em>
                                     : candidate.editError ? <span className="text-danger"> - ERROR: {candidate.editError}</span>
-                                    : <a className="btn btn-primary" onClick={this.handleEditProduct(candidate.id)}> 
+                                    : <a className="" onClick={this.handleEditProduct.bind(this,candidate.id)}> 
                                     <i className="fa fa-edit"></i></a>
                                 }
                                 &nbsp;&nbsp;&nbsp;
                                 {
                                     candidate.deleting ? <em> - Deleting...</em>
                                     : candidate.deleteError ? <span className="text-danger"> - ERROR: {candidate.deleteError}</span>
-                                    : <a className="btn btn-primary" onClick={this.handleDeletecandidate(candidate.id)}>
+                                    : <a className="" onClick={this.handleDeletecandidate(candidate.id)}>
                                         <i className="fa fa-trash-o"></i></a>
                                 }
                                 </td>
@@ -76,11 +76,5 @@ function mapState(state) {
     return { user, candidates };
 }
 
-// const actionCreators = {
-//     getUsers: userActions.getAll,
-//     deleteUser: userActions.delete,
-//     getcandidates:candidateActions.getAll,
-//     deleteCandidate:candidateActions.delete
-// }
 const connectedAdminPage = connect(mapState)(AdminPage)
 export { connectedAdminPage as AdminPage };

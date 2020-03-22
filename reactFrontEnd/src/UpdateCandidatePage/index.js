@@ -1,1 +1,1 @@
-export * from '../UpdateCandidatePage'
+export * from './UpdateCandidatePage'

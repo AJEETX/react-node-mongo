@@ -46,7 +46,7 @@ class CandidatePage extends React.Component{
         const { candidate, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
-                <h2>Add candidate</h2>
+                <h4>add candidate !!!</h4>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !candidate.FirstName ? ' has-error' : '')}>
                         <label htmlFor="FirstName">FirstName</label>

@@ -77,7 +77,7 @@ function update(candidate){
         candidateService.update(candidate)
             .then(() => { 
                 dispatch(success());
-                history.push('/');
+                history.push('/admin');
                 dispatch(alertActions.success('Update successful'));
             },
             error => {

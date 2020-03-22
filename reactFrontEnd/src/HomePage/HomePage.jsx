@@ -17,7 +17,7 @@ class HomePage extends React.Component {
         const { user, users } = this.props;
         return (
             <div className="home-page-height">
-                <h2>Hi {user.firstName}!</h2>
+                <h4>Hi {user.firstName}!</h4>
 
                 {users.loading && <em>Loading users...</em>}
                 {users.error && <span className="text-danger">ERROR: {users.error}</span>}
