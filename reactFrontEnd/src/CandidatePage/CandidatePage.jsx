@@ -54,52 +54,31 @@ class CandidatePage extends React.Component{
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !candidate.FirstName ? ' has-error' : '')}>
                         <label htmlFor="FirstName">FirstName</label>
-                        <input type="text" className="form-control" name="FirstName" value={candidate.FirstName} onChange={this.handleChange} />
-                        {submitted && !candidate.FirstName &&
-                            <div className="help-block">FirstName is required</div>
-                        }
+                        <input type="text" className={'form-control' +(submitted && !candidate.firstName ? ' error' : '')} name="FirstName" value={candidate.FirstName} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.LastName ? ' has-error' : '')}>
                         <label htmlFor="LastName">LastName</label>
-                        <input type="text" className="form-control" name="LastName" value={candidate.LastName} onChange={this.handleChange} />
-                        {submitted && !candidate.LastName &&
-                            <div className="help-block">LastName is required</div>
-                        }
+                        <input type="text" className={'form-control' +(submitted && !candidate.LastName ? ' error' : '')} name="LastName" value={candidate.LastName} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.Email ? ' has-error' : '')}>
                         <label htmlFor="Email">Email</label>
-                        <input type="email" className="form-control" name="Email" value={candidate.Email} onChange={this.handleChange} />
-                        {submitted && !candidate.Email &&
-                            <div className="help-block">Email is required</div>
-                        }
+                        <input type="email" className={'form-control' +(submitted && !candidate.Email ? ' error' : '')} name="Email" value={candidate.Email} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.Description ? ' has-error' : '')}>
                         <label htmlFor="Description">Description</label>
-                        <input type="text" className="form-control" name="Description" value={candidate.Description} onChange={this.handleChange} />
-                        {submitted && !candidate.Description &&
-                            <div className="help-block">Description is required</div>
-                        }
+                        <input type="text" className={'form-control' +(submitted && !candidate.Description ? ' error' : '')} name="Description" value={candidate.Description} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.ContactNumber ? ' has-error' : '')}>
                         <label htmlFor="ContactNumber">ContactNumber</label>
-                        <input type="number" minLength="10" className="form-control" name="ContactNumber" value={candidate.ContactNumber} onChange={this.handleChange} />
-                        {submitted && !candidate.ContactNumber &&
-                            <div className="help-block">ContactNumber is required</div>
-                        }
+                        <input type="number" minLength="10" className={'form-control' +(submitted && !candidate.ContactNumber ? ' error' : '')} name="ContactNumber" value={candidate.ContactNumber} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.DateOfBirth ? ' has-error' : '')}>
                         <label htmlFor="DateOfBirth">DateOfBirth</label>
-                        <input type="date" className="form-control" name="DateOfBirth" value={candidate.DateOfBirth} onChange={this.handleChange} />
-                        {submitted && !candidate.DateOfBirth &&
-                            <div className="help-block">DateOfBirth is required</div>
-                        }
+                        <input type="date" className={'form-control' +(submitted && !candidate.DateOfBirth ? ' error' : '')} name="DateOfBirth" value={candidate.DateOfBirth} onChange={this.handleChange} />
                     </div>  
                     <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
                         <label htmlFor="Document">Document</label>
-                        <input type="file" className="form-control" name="Document" ref={candidate.Document} onChange={this.handleChange} />
-                        {submitted && !candidate.Document &&
-                            <div className="help-block">Document is required</div>
-                        }
+                        <input type="file" className="form-control" name="Document" onChange={this.handleChange} />
                     </div>                    
                     <div className="form-group">
                         <button className="btn btn-primary">Add candidate</button> &nbsp;
