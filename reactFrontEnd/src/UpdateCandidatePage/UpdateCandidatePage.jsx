@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { candidateActions } from '../_actions';
-
+import {DatePicker} from 'react-datepicker';
 class UpdateCandidatePage extends React.Component {
     constructor(props) {
         super(props);
@@ -28,8 +28,9 @@ class UpdateCandidatePage extends React.Component {
                 Email:this.refs.Email.value,
                 Description:this.refs.Description.value,
                 DateOfBirth:this.refs.DateOfBirth.value,
-                ContactNumber:this.refs.ContactNumber.value,
-                Document:this.refs.Document.value
+                ContactNumber:this.refs.ContactNumber.value
+                // ,
+                // Document:this.refs.Document.value
         }
         if ( candidate.FirstName && candidate.LastName && candidate.Email  && candidate.Description && candidate.ContactNumber) {
             this.props.dispatch(candidateActions.update(candidate));
@@ -71,7 +72,7 @@ class UpdateCandidatePage extends React.Component {
                     <div className={'form-group' + (submitted && !candidate.DateOfBirth ? ' has-error' : '')}>
                         <label htmlFor="DateOfBirth">DateOfBirth</label>
                         <input type="date" className="form-control" placeholder="ddMMyyyy" name="DateOfBirth" 
-                        defaultValue={new Date(candidate.DateOfBirth).toDateString()} 
+                        defaultValue={new Date(candidate.DateOfBirth).toISOString().substr(0,10)}
                         onChange={(value) => this.onChange(value)} ref="DateOfBirth"  />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
