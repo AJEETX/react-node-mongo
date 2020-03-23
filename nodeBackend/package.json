@@ -5,7 +5,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/node-mongo-registration-login-api.git"
+        "url": "https://github.com/ajeetx/react-node-mongo.git"
     },
     "scripts": {
         "start": "node ./server.js",
@@ -23,6 +23,6 @@
         "rootpath": "^0.1.2"
     },
     "devDependencies": {
-        "nodemon": "^1.19.1"
+        "nodemon": "^1.19.4"
     }
 }
