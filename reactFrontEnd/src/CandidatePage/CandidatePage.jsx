@@ -15,7 +15,8 @@ class CandidatePage extends React.Component{
                 Email: '',
                 Description: '',
                 ContactNumber: 0,
-                DateOfBirth:''
+                DateOfBirth:'',
+                Document:React.createRef()
             },
             submitted: false
         };
@@ -26,6 +27,9 @@ class CandidatePage extends React.Component{
     handleChange(event) {
         const { name, value } = event.target;
         const { candidate } = this.state;
+        if(event.target.files){
+            console.log(event.target.files[0])
+        }
         this.setState({
             candidate: {
                 ...candidate,
@@ -64,7 +68,7 @@ class CandidatePage extends React.Component{
                     </div>
                     <div className={'form-group' + (submitted && !candidate.Email ? ' has-error' : '')}>
                         <label htmlFor="Email">Email</label>
-                        <input type="text" className="form-control" name="Email" value={candidate.Email} onChange={this.handleChange} />
+                        <input type="email" className="form-control" name="Email" value={candidate.Email} onChange={this.handleChange} />
                         {submitted && !candidate.Email &&
                             <div className="help-block">Email is required</div>
                         }
@@ -88,6 +92,13 @@ class CandidatePage extends React.Component{
                         <input type="date" className="form-control" name="DateOfBirth" value={candidate.DateOfBirth} onChange={this.handleChange} />
                         {submitted && !candidate.DateOfBirth &&
                             <div className="help-block">DateOfBirth is required</div>
+                        }
+                    </div>  
+                    <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
+                        <label htmlFor="Document">Document</label>
+                        <input type="file" className="form-control" name="Document" ref={candidate.Document} onChange={this.handleChange} />
+                        {submitted && !candidate.Document &&
+                            <div className="help-block">Document is required</div>
                         }
                     </div>                    
                     <div className="form-group">

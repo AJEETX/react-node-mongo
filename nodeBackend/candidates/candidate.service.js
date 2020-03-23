@@ -20,7 +20,7 @@ async function getById(id) {
     return await Candidate.findById(id).select('-hash');
 }
 
-async function create(candidateParam) {
+async function create(candidateParam,files) {
     // validate
     console.log(candidateParam)
     // if (await Candidate.findOne({ Email: candidateParam.Email })) {

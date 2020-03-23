@@ -28,7 +28,8 @@ class UpdateCandidatePage extends React.Component {
                 Email:this.refs.Email.value,
                 Description:this.refs.Description.value,
                 DateOfBirth:this.refs.DateOfBirth.value,
-                ContactNumber:this.refs.ContactNumber.value
+                ContactNumber:this.refs.ContactNumber.value,
+                Document:this.refs.Document.value
         }
         if ( candidate.FirstName && candidate.LastName && candidate.Email  && candidate.Description && candidate.ContactNumber) {
             this.props.dispatch(candidateActions.update(candidate));
@@ -91,6 +92,13 @@ class UpdateCandidatePage extends React.Component {
                             <div className="help-block">DateOfBirth is required</div>
                         }
                     </div>
+                    <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
+                        <label htmlFor="Document">Document</label>
+                        <input type="file" className="form-control" name="Document" value={candidate.Document} onChange={this.handleChange} />
+                        {submitted && !candidate.Document &&
+                            <div className="help-block">Document is required</div>
+                        }
+                    </div> 
                     <div className="form-group">
                         <button className="btn btn-primary">Update candidate</button>
                         <Link to="/admin" className="btn btn-link">Cancel</Link>

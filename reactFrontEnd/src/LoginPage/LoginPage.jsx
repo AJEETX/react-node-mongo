@@ -45,11 +45,11 @@ class LoginPage extends React.Component {
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
-                        <input type="text" className={'form-control' + (submitted && !username ? ' fa-warning' : '')} name="username" value={username} onChange={this.handleChange} />
+                        <input type="text" className={'form-control' + (submitted && !username ? ' error' : '')} name="username" value={username} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
-                        <input type="password" className={'form-control' + (submitted && !username ? ' fa-warning' : '')} name="password" value={password} onChange={this.handleChange} />
+                        <input type="password" className={'form-control' + (submitted && !username ? ' error' : '')} name="password" value={password} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Login</button>
