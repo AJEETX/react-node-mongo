@@ -10,9 +10,10 @@ class AdminPage extends React.Component {
         this.filtered=[];
         this.currentList=[];
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleDeletecandidate=this.handleDeletecandidate.bind(this);
     }
     handleDeletecandidate(id) {
-        return (e) => this.props.dispatch(candidateActions.delete(id));
+         this.props.dispatch(candidateActions.delete(id));
     }
     handleEditProduct(id) {
         this.props.dispatch(candidateActions.getById(id));
@@ -85,7 +86,7 @@ class AdminPage extends React.Component {
                                 {
                                     candidate.deleting ? <em> - Deleting...</em>
                                     : candidate.deleteError ? <span className="text-danger"> - ERROR: {candidate.deleteError}</span>
-                                    : <a className="" onClick={this.handleDeletecandidate(candidate.id)}>
+                                    : <a className="" onClick={() => {if(window.confirm('Delete the item?')){this.handleDeletecandidate(candidate.id)};}}>
                                         <i className="fa fa-trash-o"></i></a>
                                 }
                                 </td>
