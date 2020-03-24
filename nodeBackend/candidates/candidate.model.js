@@ -8,11 +8,7 @@ const schema = new Schema({
     Description: { type: String},
     ContactNumber: { type: Number, required: true },
     DateOfBirth: { type: Date, default: Date.now },
-    Document: {
-        file: { type: Buffer },
-        filename: { type: String },
-        mimetype: { type: String }
-      },
+    Document: {type:String},
     modifiedDate: { type: Date, default: Date.now },
     createdDate: { type: Date, default: Date.now }
 });

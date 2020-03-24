@@ -14,22 +14,27 @@ class CandidatePage extends React.Component{
                 LastName: '',
                 Email: '',
                 Description: '',
+                Document:null,
                 ContactNumber: 0,
-                DateOfBirth:'',
-                Document:React.createRef()
+                DateOfBirth:''
             },
             submitted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.onChangeHandler=this.onChangeHandler.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    onChangeHandler(event){
+        this.setState({
+             Document:event.target.files[0],
+            loaded: 0,
+        })
     }
     handleChange(event) {
         const { name, value } = event.target;
         const { candidate } = this.state;
-        if(event.target.files){
-            console.log(event.target.files[0])
-        }
+
         this.setState({
             candidate: {
                 ...candidate,
@@ -37,14 +42,28 @@ class CandidatePage extends React.Component{
             }
         });
     }
+    convert2Base64(file){
+        return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        });}
+        Base64(file){ 
+            return this.convert2Base64(file);
+        }
     handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
         const { candidate } = this.state;
         const { dispatch } = this.props;
-        if (candidate.FirstName && candidate.LastName && candidate.Email && candidate.ContactNumber) {
-            dispatch(candidateActions.register(candidate));
-        }
+        const b=this.Base64(this.state.Document);
+        b.then(data=>{
+            candidate.Document=data;
+            if (candidate.FirstName && candidate.LastName && candidate.Email && candidate.ContactNumber) {
+                dispatch(candidateActions.register(candidate));
+            }
+        })
     }
     render() {
         const { candidate, submitted } = this.state;
@@ -54,7 +73,7 @@ class CandidatePage extends React.Component{
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !candidate.FirstName ? ' has-error' : '')}>
                         <label htmlFor="FirstName">FirstName</label>
-                        <input type="text" className={'form-control' +(submitted && !candidate.firstName ? ' error' : '')} name="FirstName" value={candidate.FirstName} onChange={this.handleChange} />
+                        <input type="text" className={'form-control' +(submitted && !candidate.FirstName ? ' error' : '')} name="FirstName" value={candidate.FirstName} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !candidate.LastName ? ' has-error' : '')}>
                         <label htmlFor="LastName">LastName</label>
@@ -76,9 +95,9 @@ class CandidatePage extends React.Component{
                         <label htmlFor="DateOfBirth">DateOfBirth</label>
                         <input type="date" className={'form-control' +(submitted && !candidate.DateOfBirth ? ' error' : '')} name="DateOfBirth" value={candidate.DateOfBirth} onChange={this.handleChange} />
                     </div>  
-                    <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
+                    <div className='form-group'>
                         <label htmlFor="Document">Document</label>
-                        <input type="file" className="form-control" name="Document" onChange={this.handleChange} />
+                        <input type="file" className="form-control" name="Document" onChange={this.onChangeHandler} />
                     </div>                    
                     <div className="form-group">
                         <button className="btn btn-primary">Add candidate</button> &nbsp;

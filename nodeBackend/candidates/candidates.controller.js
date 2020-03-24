@@ -14,8 +14,7 @@ router.delete('/:id', _delete);
 module.exports = router;
 
 function register(req, res, next) {
-    console.log(`first candidate to be registered ${req}`)
-    candidateService.create(req.body,req.files)
+    candidateService.create(req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
