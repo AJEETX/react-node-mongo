@@ -34,11 +34,11 @@ function register(candidate) {
     function failure(error) { return { type: candidateConstants.REGISTER_FAILURE, error } }
 }
 
-function getAll() {
+function getAll(query) {
     return dispatch => {
-        dispatch(request());
+        dispatch(request(query));
 
-        candidateService.getAll()
+        candidateService.getAll(query)
             .then(
                 candidates => dispatch(success(candidates)),
                 error => dispatch(failure(error.toString()))

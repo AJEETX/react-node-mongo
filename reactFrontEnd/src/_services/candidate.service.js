@@ -7,6 +7,7 @@ const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('
 export const candidateService = {
     register,
     getAll,
+    getAllSearch,
     getById,
     update,
     delete: _delete,
@@ -14,13 +15,26 @@ export const candidateService = {
     get currentUserValue () { return currentUserSubject.value }
 };
 
-function getAll() {
+function getAll(query) {
     const requestOptions = {
         method: 'GET',
         headers: { ...authHeader(), 'Content-Type': 'application/json' }
     };
-
-    return fetch(`${config.apiUrl}/candidates`, requestOptions).then(handleResponse);
+    var apiUrl=`${config.apiUrl}/candidates`;
+    if(query && query!=''){
+        apiUrl+=`/search/${query}`
+    }
+    return fetch(apiUrl, requestOptions).then(handleResponse);
+}
+function getAllSearch(query) {
+    const requestOptions = {
+        method: 'GET',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' }
+    };
+    if(!query){
+        query='undefined';
+    }
+    return fetch(`${config.apiUrl}/candidates/`+query, requestOptions).then(handleResponse);
 }
 
 function getById(id) {

@@ -6,16 +6,25 @@ const Candidate = db.Candidate;
 
 module.exports = {
     getAll,
+    getAllSearch,
     getById,
     create,
     update,
     delete: _delete
 };
 
+async function getAllSearch(query) {
+    if(query !='' && query!='undefined'){
+        return await Candidate.find({ $or: [ 
+            { FirstName: { $regex: query, $options: "i" } }, 
+            {LastName:{ $regex: query, $options: "i" }},
+            {Email:{ $regex: query, $options: "i" }} ] }).select('-hash');
+}
+return await Candidate.find().select('-hash');
+}
 async function getAll() {
     return await Candidate.find().select('-hash');
 }
-
 async function getById(id) {
     return await Candidate.findById(id).select('-hash');
 }

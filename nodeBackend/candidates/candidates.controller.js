@@ -4,6 +4,7 @@ const candidateService = require('./candidate.service');
 
 // routes
 router.post('/register', register);
+router.get('/search/:query', getAllSearch);
 router.get('/', getAll);
 router.get('/current', getCurrent);
 router.get('/:id', getById);
@@ -18,9 +19,13 @@ function register(req, res, next) {
         .then(() => res.json({}))
         .catch(err => next(err));
 }
-
 function getAll(req, res, next) {
     candidateService.getAll()
+        .then(candidates => res.json(candidates))
+        .catch(err => next(err));
+}
+function getAllSearch(req, res, next) {
+    candidateService.getAllSearch(req.params.query)
         .then(candidates => res.json(candidates))
         .catch(err => next(err));
 }

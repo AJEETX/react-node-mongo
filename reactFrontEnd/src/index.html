@@ -6,6 +6,13 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        html{min-width: 420px;}
+        .search{
+            width: 67%;
+            display: inline-block;
+            margin-bottom: 1%;
+            margin-right: 2%;
+        }
         a { cursor: pointer; }
         .help-block { font-size: 12px; }
         html,body,#app,.center-top,.container,.row{
@@ -27,6 +34,8 @@
         }
         table{
             width: 100%;
+            table-layout: fixed;
+            word-break: break-all;
         }
         table th, table td{
             border: 1px solid #ddd;
@@ -88,9 +97,10 @@
         label{
             margin-bottom: 0;
         }
-        .add-candidate-link-button{
-            float: right;
+        .add-candidate{
+            display: inline-block;
             margin-bottom: 1%;
+            width: 30%;
         }
         input{
             background-color: lightyellow !important;

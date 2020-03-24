@@ -1,31 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { userService } from '../_services';
-import { userActions } from '../_actions';
 import { candidateActions } from '../_actions';
-import {dateFormat} from 'dateformat'
+import { of } from 'rxjs';
+
 class AdminPage extends React.Component {
     constructor(props){
         super(props)
+        this.filtered=[];
+        this.currentList=[];
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
     handleDeletecandidate(id) {
         return (e) => this.props.dispatch(candidateActions.delete(id));
     }
     handleEditProduct(id) {
-        this.props.dispatch(candidateActions.getById(id)); 
+        this.props.dispatch(candidateActions.getById(id));
     }
     componentDidMount() {
        this.props.dispatch(candidateActions.getAll());
+       this.refs.search.focus();
     }
-
+    List(e){
+        if (e && e.target.value !== "") {
+            const filter = e.target.value.toLowerCase();
+            this.props.dispatch(candidateActions.getAll(filter));
+        }else{
+            this.props.dispatch(candidateActions.getAll(''));
+        }
+    }
+    handleSearchChange(e) {
+        this.List(e);
+    }
     render() {
         const { user, candidates } = this.props;
-
+        
         return (
             <div className="home-page-height">
-            <div> <Link to="/candidate" className="add-candidate-link-button" ><button type="button" className="btn btn-primary">Add Candidate</button></Link></div>
+
             <h4>Hi {user.firstName}!</h4>
+            <div className="search"> 
+                <input ref="search" type="text" className="form-control" onChange={this.handleSearchChange} placeholder="Search..." />
+            </div>
+            <div className="add-candidate"> <Link to="/candidate" className="add-candidate-link-button" >
+                <button type="button" className="btn btn-primary">Add Candidate</button>
+                </Link></div>
+
                 <div>
                 {candidates.loading && <em>Loading candidates...</em>}
                 {candidates.error && <span className="text-danger">ERROR: {candidates.error}</span>}
@@ -49,16 +69,16 @@ class AdminPage extends React.Component {
                                 <td>
                                 { candidate.LastName}</td>
                                 <td>
-                                { candidate.Email}</td>  
+                                { candidate.Email}</td>
                                 <td>
-                                { candidate.ContactNumber}</td>  
+                                { candidate.ContactNumber}</td>
                                 <td>
-                                {  new Date(candidate.DateOfBirth).toDateString()}</td>                                                                                                
+                                {  new Date(candidate.DateOfBirth).toDateString()}</td>
                                 <td className="action">
                                 {
                                     candidate.editing ? <em> - Editing...</em>
                                     : candidate.editError ? <span className="text-danger"> - ERROR: {candidate.editError}</span>
-                                    : <a className="" onClick={this.handleEditProduct.bind(this,candidate.id)}> 
+                                    : <a className="" onClick={this.handleEditProduct.bind(this,candidate.id)}>
                                     <i className="fa fa-edit"></i></a>
                                 }
                                 &nbsp;&nbsp;&nbsp;
