@@ -9,6 +9,7 @@ const schema = new Schema({
     ContactNumber: { type: Number, required: true },
     DateOfBirth: { type: Date, default: Date.now },
     Document: {type:String},
+    UserId:{type:String, required:true},
     modifiedDate: { type: Date, default: Date.now },
     createdDate: { type: Date, default: Date.now }
 });

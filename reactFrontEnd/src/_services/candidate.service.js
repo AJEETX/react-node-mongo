@@ -7,6 +7,7 @@ const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('
 export const candidateService = {
     register,
     getAll,
+    postAll,
     getAllSearch,
     getById,
     update,
@@ -15,6 +16,17 @@ export const candidateService = {
     get currentUserValue () { return currentUserSubject.value }
 };
 
+function postAll(query) {
+    const requestOptions = {
+        method: 'GET',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' }
+    };
+    if(!query){
+        query='undefined';
+    }
+    var userId=JSON.parse(localStorage.getItem('user'))['username'];
+    return fetch(`${config.apiUrl}/candidates/admin/`+userId, requestOptions).then(handleResponse);
+}
 function getAll(query) {
     const requestOptions = {
         method: 'GET',

@@ -5,6 +5,7 @@ const candidateService = require('./candidate.service');
 // routes
 router.post('/register', register);
 router.get('/search/:query', getAllSearch);
+router.get('/admin/:userId', postAll);
 router.get('/', getAll);
 router.get('/current', getCurrent);
 router.get('/:id', getById);
@@ -20,6 +21,11 @@ function register(req, res, next) {
 }
 function getAll(req, res, next) {
     candidateService.getAll()
+        .then(candidates => res.json(candidates))
+        .catch(err => next(err));
+}
+function postAll(req, res, next) {
+    candidateService.postAll(req.params.query,req.params.userId)
         .then(candidates => res.json(candidates))
         .catch(err => next(err));
 }
@@ -42,8 +48,6 @@ function getById(req, res, next) {
 }
 
 function update(req, res, next) {
-    console.log('update in progress ... '+req.params.id)
-    console.log('update in progress ... '+req.params.body)
     candidateService.update(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));

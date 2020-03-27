@@ -16,7 +16,8 @@ class CandidatePage extends React.Component{
                 Description: '',
                 Document:null,
                 ContactNumber: 0,
-                DateOfBirth:''
+                DateOfBirth:'',
+                UserId:''
             },
             submitted: false
         };
@@ -34,13 +35,20 @@ class CandidatePage extends React.Component{
     handleChange(event) {
         const { name, value } = event.target;
         const { candidate } = this.state;
-
         this.setState({
             candidate: {
                 ...candidate,
                 [name]: value
             }
         });
+        if(event.target.files && event.target.files[0]){
+            this.setState({
+                image: URL.createObjectURL(event.target.files[0])
+              });
+            this.Base64(event.target.files[0]).then(fileData=>{
+                candidate.Document=fileData
+            });
+        }
     }
     convert2Base64(file){
         return new Promise((resolve, reject) => {
@@ -57,13 +65,10 @@ class CandidatePage extends React.Component{
         this.setState({ submitted: true });
         const { candidate } = this.state;
         const { dispatch } = this.props;
-        const b=this.Base64(this.state.Document);
-        b.then(data=>{
-            candidate.Document=data;
-            if (candidate.FirstName && candidate.LastName && candidate.Email && candidate.ContactNumber) {
+        candidate.UserId=this.props.authentication.user.username;
+            if (candidate.UserId && candidate.FirstName && candidate.LastName && candidate.Email && candidate.ContactNumber) {
                 dispatch(candidateActions.register(candidate));
             }
-        })
     }
     render() {
         const { candidate, submitted } = this.state;
@@ -98,6 +103,7 @@ class CandidatePage extends React.Component{
                     <div className='form-group'>
                         <label htmlFor="Document">Document</label>
                         <input type="file" className="form-control" name="Document" onChange={this.onChangeHandler} />
+                        <img id="target" src={this.state.image}/>
                     </div>                    
                     <div className="form-group">
                         <button className="btn btn-primary">Add candidate</button> &nbsp;
@@ -110,13 +116,10 @@ class CandidatePage extends React.Component{
     }
 }
 
-
-
-
 function mapStateToProps(state) {
-    const { candidates } = state.candidates;
+    const { authentication } = state;
     return {
-        candidates
+        authentication
     };
 }
 

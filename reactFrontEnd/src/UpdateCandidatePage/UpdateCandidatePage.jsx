@@ -77,7 +77,7 @@ class UpdateCandidatePage extends React.Component {
                     </div>
                     <div className={'form-group' + (submitted && !candidate.Document ? ' has-error' : '')}>
                         <label htmlFor="Document">Document</label>
-                        <input type="file" className="form-control" name="Document" value={candidate.Document} onChange={this.handleChange} />
+                        <input type="file" className="form-control" name="Document" value={candidate.Document} defaultValue={candidate.Document} onChange={this.handleChange} />
                     </div> 
                     <div className="form-group">
                         <button className="btn btn-primary">Update candidate</button>

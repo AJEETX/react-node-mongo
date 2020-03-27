@@ -1,11 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {userService} from '../_services'
+import { history, Role  } from '../_helpers';
 
 import { userActions } from '../_actions';
 
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentUser: null,
+            isAdmin: false
+        };
+    }
     componentDidMount() {
+        userService.currentUser.subscribe(x => this.setState({
+            currentUser: x,
+            isAdmin: x && x.permissionLevel === Role.Admin
+        }));
         this.props.getUsers();
     }
 
@@ -18,10 +31,10 @@ class HomePage extends React.Component {
         return (
             <div className="home-page-height">
                 <h4>Hi {user.firstName}!</h4>
-
+                {user.permissionLevel === Role.Admin && users.items &&
+                <div>
                 {users.loading && <em>Loading users...</em>}
                 {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
                 <table>
                     <thead>
                         <tr>
@@ -45,8 +58,12 @@ class HomePage extends React.Component {
                         )}
                     </tbody>
                 </table>
+                
+                </div>
                 }
-
+                {user.permissionLevel === Role.User &&
+                <Link to="/admin" className="nav-item nav-link">See Profile</Link>
+                }
             </div>
         );
     }

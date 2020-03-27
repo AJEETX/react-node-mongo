@@ -13,6 +13,9 @@
             margin-bottom: 1%;
             margin-right: 2%;
         }
+        .search-input{
+            display: inline-block;
+        }
         a { cursor: pointer; }
         .help-block { font-size: 12px; }
         html,body,#app,.center-top,.container,.row{
@@ -54,6 +57,7 @@
         table tr:hover {
             background-color: #ddd;
         }
+        table td:first-child { width: 13% ;}
         .alert{
             margin-left: 40%;
         }
@@ -83,7 +87,7 @@
             min-width: 50px;
         }
         .action{
-            width: 15%;
+            width: 12%;
         }
         .fa, .fa{
             font-size:25px;
@@ -110,6 +114,19 @@
         }
         em{
             color: green;
+        }
+        #filtersubmit {
+            position: relative;
+            z-index: 1;
+            left: -35px;
+            top: 1px;
+            color: #7B7B7B;
+            cursor:pointer;
+            width: 0;
+        }
+        .fa-edit,.fa-trash-o,fa-eye{
+            padding-left: 1%;
+            padding-right: 0;
         }
     </style>
 </head>

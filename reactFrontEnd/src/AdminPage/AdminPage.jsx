@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { candidateActions } from '../_actions';
 import { of } from 'rxjs';
+import { Role } from '../_helpers';
 
 class AdminPage extends React.Component {
     constructor(props){
@@ -19,15 +20,15 @@ class AdminPage extends React.Component {
         this.props.dispatch(candidateActions.getById(id));
     }
     componentDidMount() {
-       this.props.dispatch(candidateActions.getAll());
+       this.props.dispatch(candidateActions.postAll());
        this.refs.search.focus();
     }
     List(e){
         if (e && e.target.value !== "") {
             const filter = e.target.value.toLowerCase();
-            this.props.dispatch(candidateActions.getAll(filter));
+            this.props.dispatch(candidateActions.postAll(filter));
         }else{
-            this.props.dispatch(candidateActions.getAll(''));
+            this.props.dispatch(candidateActions.postAll(''));
         }
     }
     handleSearchChange(e) {
@@ -41,8 +42,11 @@ class AdminPage extends React.Component {
 
             <h4>Hi {user.firstName}!</h4>
             <div className="search"> 
-                <input ref="search" type="text" className="form-control" onChange={this.handleSearchChange} placeholder="Search..." />
+                <input ref="search" type="text" className="form-control search-input" onChange={this.handleSearchChange} 
+                placeholder="type keyword to search..." />
+                <i id="filtersubmit" className="fa fa-search"></i>
             </div>
+            
             <div className="add-candidate"> <Link to="/candidate" className="add-candidate-link-button" >
                 <button type="button" className="btn btn-primary">Add Candidate</button>
                 </Link></div>
@@ -54,35 +58,37 @@ class AdminPage extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                        <th> First Name</th>
-                        <th> Last Name</th>
-                        <th> Email</th>
-                        <th> Contact Number</th>
+                        <th> <i className="fa fa-user"></i></th>
+                        <th><i className="fa fa-envelope"></i></th>
+                        <th> <i className="fa fa-mobile-phone"></i></th>
                         <th> Date of Birth</th>
-                        <th> Action</th>
+                        <th className="action"> Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {candidates.items.map((candidate, index) =>
                             <tr key={candidate.id}>
                                 <td>
-                                {candidate.FirstName }</td>
-                                <td>
-                                { candidate.LastName}</td>
+                                {candidate.FirstName +' '+candidate.LastName}</td>
                                 <td>
                                 { candidate.Email}</td>
                                 <td>
                                 { candidate.ContactNumber}</td>
                                 <td>
                                 {  new Date(candidate.DateOfBirth).toDateString()}</td>
-                                <td className="action">
+                                <td className="">
+                                {
+                                    candidate.editing ? <em> - Editing...</em>
+                                    : candidate.editError ? <span className="text-danger"> - ERROR: {candidate.editError}</span>
+                                    : <a className="" onClick={this.handleEditProduct.bind(this,candidate.id)}>
+                                    <i className="fa fa-eye"></i></a>
+                                }
                                 {
                                     candidate.editing ? <em> - Editing...</em>
                                     : candidate.editError ? <span className="text-danger"> - ERROR: {candidate.editError}</span>
                                     : <a className="" onClick={this.handleEditProduct.bind(this,candidate.id)}>
                                     <i className="fa fa-edit"></i></a>
                                 }
-                                &nbsp;&nbsp;&nbsp;
                                 {
                                     candidate.deleting ? <em> - Deleting...</em>
                                     : candidate.deleteError ? <span className="text-danger"> - ERROR: {candidate.deleteError}</span>

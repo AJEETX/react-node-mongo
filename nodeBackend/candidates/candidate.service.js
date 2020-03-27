@@ -3,9 +3,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const Candidate = db.Candidate;
-
+const User=require('./../users/user.service')
 module.exports = {
     getAll,
+    postAll,
     getAllSearch,
     getById,
     create,
@@ -24,6 +25,45 @@ return await Candidate.find().select('-hash');
 }
 async function getAll() {
     return await Candidate.find().select('-hash');
+}
+async function postAll(query,userId) {
+    var user= await User.getByUserId(userId)
+    console.log(user)
+    if(user.permissionLevel==10 && query && query!='undefined'){
+        console.log('user.permissionLevel==10 && query && query!="undefined")')
+        return await Candidate.find(
+            {
+                $and : [
+                    {
+                        $or: [{ FirstName: { $regex: query, $options: "i" } },{LastName:{ $regex: query, $options: "i" }},{Email:{ $regex: query, $options: "i" }} ]
+                    }
+                ]
+            }).select('-hash');
+    }
+    if(user.permissionLevel<10 && query && query!='undefined')
+    {
+        console.log('user.permissionLevel<10 && query && query!="undefined"')
+        return await Candidate.find(
+            {
+                $and : [
+                    {
+                        $or: [{ FirstName: { $regex: query, $options: "i" } },{LastName:{ $regex: query, $options: "i" }},{Email:{ $regex: query, $options: "i" }} ]
+                    },
+                    {
+                        UserId:userId
+                    }
+                ]
+            }).select('-hash');
+    }
+    if(user.permissionLevel==10){
+        console.log('user.permissionLevel==10')
+        return await Candidate.find().select('-hash');
+    }
+        console.log('last user based , user.permissionLevel=' + user.permissionLevel)
+        return await Candidate.find(
+        {
+            UserId:userId
+        }).select('-hash');
 }
 async function getById(id) {
     return await Candidate.findById(id).select('-hash');

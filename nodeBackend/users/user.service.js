@@ -8,6 +8,7 @@ module.exports = {
     authenticate,
     getAll,
     getById,
+    getByUserId,
     create,
     update,
     delete: _delete
@@ -32,7 +33,11 @@ async function getAll() {
 async function getById(id) {
     return await User.findById(id).select('-hash');
 }
-
+async function getByUserId(userId){
+    return await User.findOne({
+        username:userId
+    })
+}
 async function create(userParam) {
     // validate
     console.log(userParam)

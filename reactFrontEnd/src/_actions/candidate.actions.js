@@ -6,6 +6,7 @@ import { history } from '../_helpers';
 export const candidateActions = {
     register,
     getAll,
+    postAll,
     getById,
     update,
     delete: _delete
@@ -34,6 +35,21 @@ function register(candidate) {
     function failure(error) { return { type: candidateConstants.REGISTER_FAILURE, error } }
 }
 
+function postAll(query) {
+    return dispatch => {
+        dispatch(request(query));
+
+        candidateService.postAll(query)
+            .then(
+                candidates => dispatch(success(candidates)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: candidateConstants.GETALL_REQUEST } }
+    function success(candidates) { return { type: candidateConstants.GETALL_SUCCESS, candidates } }
+    function failure(error) { return { type: candidateConstants.GETALL_FAILURE, error } }
+}
 function getAll(query) {
     return dispatch => {
         dispatch(request(query));
@@ -51,6 +67,8 @@ function getAll(query) {
 }
 
 function getById(id) {
+
+    console.log('update id ='+id)
     return dispatch => {
         dispatch(request(id));
 
