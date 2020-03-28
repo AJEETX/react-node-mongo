@@ -25,7 +25,7 @@ function postAll(query) {
         query='undefined';
     }
     var userId=JSON.parse(localStorage.getItem('user'))['username'];
-    return fetch(`${config.apiUrl}/candidates/admin/`+userId, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/candidates/admin/`+userId+`/`+query, requestOptions).then(handleResponse);
 }
 function getAll(query) {
     const requestOptions = {

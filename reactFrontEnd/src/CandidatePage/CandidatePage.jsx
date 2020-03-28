@@ -13,7 +13,7 @@ class CandidatePage extends React.Component{
                 FirstName: '',
                 LastName: '',
                 Email: '',
-                Description: '',
+                Description: 'In progress...',
                 Document:null,
                 ContactNumber: 0,
                 DateOfBirth:'',

@@ -42,7 +42,6 @@ async function postAll(query,userId) {
     }
     if(user.permissionLevel<10 && query && query!='undefined')
     {
-        console.log('user.permissionLevel<10 && query && query!="undefined"')
         return await Candidate.find(
             {
                 $and : [
@@ -56,10 +55,8 @@ async function postAll(query,userId) {
             }).select('-hash');
     }
     if(user.permissionLevel==10){
-        console.log('user.permissionLevel==10')
         return await Candidate.find().select('-hash');
     }
-        console.log('last user based , user.permissionLevel=' + user.permissionLevel)
         return await Candidate.find(
         {
             UserId:userId

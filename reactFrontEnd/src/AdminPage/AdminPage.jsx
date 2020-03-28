@@ -61,8 +61,8 @@ class AdminPage extends React.Component {
                         <th> <i className="fa fa-user"></i></th>
                         <th><i className="fa fa-envelope"></i></th>
                         <th> <i className="fa fa-mobile-phone"></i></th>
-                        <th> Date of Birth</th>
-                        <th className="action"> Action</th>
+                        <th><i className="fa fa-bell blinking-header"></i></th>
+                        <th className="action"><i className="fa fa-check-circle"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +75,9 @@ class AdminPage extends React.Component {
                                 <td>
                                 { candidate.ContactNumber}</td>
                                 <td>
-                                {  new Date(candidate.DateOfBirth).toDateString()}</td>
+                                <span className="blinking">{ candidate.Description}</span> </td>
+                                {/* <td>
+                                {  new Date(candidate.DateOfBirth).toDateString()}</td> */}
                                 <td className="">
                                 {
                                     candidate.editing ? <em> - Editing...</em>

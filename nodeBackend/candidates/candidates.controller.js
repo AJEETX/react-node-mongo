@@ -5,7 +5,7 @@ const candidateService = require('./candidate.service');
 // routes
 router.post('/register', register);
 router.get('/search/:query', getAllSearch);
-router.get('/admin/:userId', postAll);
+router.get('/admin/:userId/:query', postAll);
 router.get('/', getAll);
 router.get('/current', getCurrent);
 router.get('/:id', getById);

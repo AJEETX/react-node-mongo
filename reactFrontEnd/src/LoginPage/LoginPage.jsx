@@ -20,7 +20,9 @@ class LoginPage extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    componentDidMount(){
+        this.refs.username.focus();        
+    }
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
@@ -45,7 +47,7 @@ class LoginPage extends React.Component {
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
-                        <input type="text" className={'form-control' + (submitted && !username ? ' error' : '')} name="username" value={username} onChange={this.handleChange} />
+                        <input ref="username" type="text" className={'form-control' + (submitted && !username ? ' error' : '')} name="username" value={username} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
