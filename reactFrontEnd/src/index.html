@@ -59,7 +59,7 @@
         }
         table td:first-child { width: 13% ;}
         .alert{
-            margin-left: 40%;
+            margin-left: 30%;
         }
         .alert-warning{
             margin-left: 30%;
@@ -147,6 +147,25 @@
             60%{    color: crimson;font-weight:bold ;  }
             99%{    color:crimson; font-weight:bolder ;  }
             100%{   color: crimson;  font-weight:bolder ;   }
+        }
+        .alert {animation:signup-response 0.5s 1;
+            -webkit-animation:signup-response 0.5s 1;
+            animation-fill-mode: forwards;
+
+            animation-delay:2s;
+            -webkit-animation-delay:1s; /* Safari and Chrome */
+            -webkit-animation-fill-mode: forwards;
+
+        } 
+
+        @keyframes signup-response{
+            from {opacity :1;}
+            to {opacity :0;}
+        }
+
+        @-webkit-keyframes signup-response{
+            from {opacity :1;}
+            to {opacity :0;}
         }
     </style>
 </head>

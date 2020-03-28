@@ -24,7 +24,7 @@ function postAll(query) {
     if(!query){
         query='undefined';
     }
-    var userId=JSON.parse(localStorage.getItem('user'))['username'];
+    var userId=JSON.parse(localStorage.getItem('user'))['email'];
     return fetch(`${config.apiUrl}/candidates/admin/`+userId+`/`+query, requestOptions).then(handleResponse);
 }
 function getAll(query) {

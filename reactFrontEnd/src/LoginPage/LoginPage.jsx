@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
         this.props.logout();
 
         this.state = {
-            username: '',
+            email: '',
             password: '',
             submitted: false
         };
@@ -21,7 +21,7 @@ class LoginPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount(){
-        this.refs.username.focus();        
+        this.refs.email.focus();        
     }
     handleChange(e) {
         const { name, value } = e.target;
@@ -32,26 +32,27 @@ class LoginPage extends React.Component {
         e.preventDefault();
 
         this.setState({ submitted: true });
-        const { username, password } = this.state;
-        if (username && password) {
-            this.props.login(username, password);
+        const { email, password } = this.state;
+        if (email && password) {
+            this.props.login(email, password);
         }
     }
 
     render() {
         const { loggingIn } = this.props;
-        const { username, password, submitted } = this.state;
+        const { email, password, submitted } = this.state;
         return (
             <div className="col-md-6 offset-md-3">
                 <h4>candidate login !!!</h4>
+                <div>{loggingIn && <i className="fa fa-spinner w3-spin" ></i>}</div>
                 <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input ref="username" type="text" className={'form-control' + (submitted && !username ? ' error' : '')} name="username" value={username} onChange={this.handleChange} />
+                    <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
+                        <label htmlFor="email">Email</label>
+                        <input ref="email" type="email" className={'form-control' + (submitted && !email ? ' error' : '')} name="email" value={email} onChange={this.handleChange} />
                     </div>
                     <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
-                        <input type="password" className={'form-control' + (submitted && !username ? ' error' : '')} name="password" value={password} onChange={this.handleChange} />
+                        <input type="password" className={'form-control' + (submitted && !email ? ' error' : '')} name="password" value={password} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Login</button>

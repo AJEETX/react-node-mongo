@@ -20,15 +20,14 @@ async function getAllSearch(query) {
             { FirstName: { $regex: query, $options: "i" } }, 
             {LastName:{ $regex: query, $options: "i" }},
             {Email:{ $regex: query, $options: "i" }} ] }).select('-hash');
-}
-return await Candidate.find().select('-hash');
+    }
+    return await Candidate.find().select('-hash');
 }
 async function getAll() {
     return await Candidate.find().select('-hash');
 }
 async function postAll(query,userId) {
     var user= await User.getByUserId(userId)
-    console.log(user)
     if(user.permissionLevel==10 && query && query!='undefined'){
         console.log('user.permissionLevel==10 && query && query!="undefined")')
         return await Candidate.find(
