@@ -65,7 +65,7 @@ class CandidatePage extends React.Component{
         this.setState({ submitted: true });
         const { candidate } = this.state;
         const { dispatch } = this.props;
-        candidate.UserId=this.props.authentication.user.username;
+        candidate.UserId=this.props.authentication.user.email;
             if (candidate.UserId && candidate.FirstName && candidate.LastName && candidate.Email && candidate.ContactNumber) {
                 dispatch(candidateActions.register(candidate));
             }

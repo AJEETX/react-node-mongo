@@ -27,7 +27,7 @@ async function getAll() {
     return await Candidate.find().select('-hash');
 }
 async function postAll(query,userId) {
-    var user= await User.getByUserId(userId)
+    var user= await User.getByUserId(userId);
     if(user.permissionLevel==10 && query && query!='undefined'){
         console.log('user.permissionLevel==10 && query && query!="undefined")')
         return await Candidate.find(
@@ -54,7 +54,9 @@ async function postAll(query,userId) {
             }).select('-hash');
     }
     if(user.permissionLevel==10){
-        return await Candidate.find().select('-hash');
+        var candidates=await Candidate.find().select('-hash');
+        console.log(candidates)
+        return candidates;
     }
         return await Candidate.find(
         {
@@ -67,13 +69,14 @@ async function getById(id) {
 
 async function create(candidateParam) {
     // validate
-    console.log(candidateParam)
+    console.log( 'candidate adding ...'+candidateParam)
     // if (await Candidate.findOne({ Email: candidateParam.Email })) {
     //     throw 'Email "' + candidateParam.Email + '" is already taken';
     // }
 
     const candidate = new Candidate(candidateParam);
     // save candidate
+    console.log( 'candidate added ...'+candidateParam)
     await candidate.save();
 }
 
